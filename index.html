@@ -22,27 +22,26 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
-
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Customers
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Add Customer</a>
-              <a class="dropdown-item" href="#">Search Customers</a>
-              <a class="dropdown-item" href="#">Customer Order History</a>
+              <a class="dropdown-item" href="/views/customers/add.html">Add
+                Customer</a>
+              <a class="dropdown-item" href="/views/customers/search.html">Search Customers</a>
+              <a class="dropdown-item" href="/views/customers/orderhistory.html">Customer Order History</a>
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" href="/views/orders/viewDetails.html" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Orders
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Place Order</a>
-              <a class="dropdown-item" href="#">View Order Details</a>
+              <a class="dropdown-item" href="/views/orders/place.html" onclick="placeOrder">Place Order</a>
+              <a class="dropdown-item" href="/views/orders/viewDetails.html">View Order Details</a>
             </div>
           </li>
           <li class="nav-item dropdown">
@@ -51,18 +50,65 @@
               Locations
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Location Order History</a>
+              <a class="dropdown-item" href="/views/locations/orderHistory.html">Location Order History</a>
             </div>
           </li>
         </ul>
       </div>
     </nav>
   </header>
-  <div id="formArea"></div>
-  <div id="tableArea"></div>
+  <main>
+    <br>
+    <div id="formArea"></div>
+    <br>
+    <div id="tableArea"></div>
+  </main>
+
+
+  <!-- <form action="" method="post">
+    <fieldset>
+      <legend>Place Order</legend>
+      <select name="" id="">Customer<option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+      <select name="" id="">Location<option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+      <select name="" id="">Location<option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+        <option value=""></option>
+      </select>
+      <label for=""><input type="number"></label>
+      <div>
+        <button onclick="cancel('Placing Order')">Cancel</button>
+        <button>Add </button>
+        <button type="submit" id="formActionBtn">Place</button>
+      </div>
+    </fieldset>
+  </form> -->
+
+  <!-- <form action="" method="post">
+    <div>
+      <label for="">First Name<input type="text" name="" id=""></label>
+      <label for="">Last Name<input type="text" name="" id=""></label>
+    </div>
+    <div>
+      <button onclick="cancel(message)">Cancel</button><button id="formActionBtn"></button>
+    </div>
+  </form> -->
+
+
 
   <footer></footer>
-  <script src="public/JS/"></script>
+  <script src="public/JS/storeOperations.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
     crossorigin="anonymous"></script>
