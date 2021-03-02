@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Place Order</title>
 </head>
 
-<body>
+<body onload="LoadListsForOrders()">
   <header>
 
   </header>
@@ -16,33 +17,24 @@
     <form action="" method="post">
       <fieldset>
         <legend>Place Order</legend>
-        <div>
-          <label for="">
-            <select name="" id="">
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-              <option value=""></option>
-            </select>
-          </label>
-          <select name="" id="">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+
+        <label for="customerList">Customer
+          <select name="customer" id="customerList">
           </select>
-          <select name="" id="">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+        </label>
+
+        <label for="LocationList">Location
+          <select name="location" id="LocationList">
           </select>
-        </div>
+        </label>
+        <label for="ProductList">Product
+          <select name="product" id="ProductList">
+          </select>
+        </label>
+
         <div>
-          <label for="">Last Name<input type="number" name="" id="" placeholder="0"></label>
+          <label for="quantity">Quantity<input type="number" name="quantity" id="quantity" placeholder="0" min="0"
+              max=50></label>
         </div>
         <div>
           <a href="../../index.html">Cancel</a>
@@ -51,7 +43,7 @@
       </fieldset>
     </form>`
   </main>
-  <script src=""></script>
+  <script src="../../public/JS/storeOperations.js"></script>
 </body>
 
 </html>

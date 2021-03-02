@@ -1,39 +1,3 @@
-function placeOrder() {
-  // alert("You totally picked this");
-  let form = document.getElementById("formArea")
-  formingOrderForm = `  <form action="" method="post">
-  <fieldset>
-    <legend>Place Order</legend>
-    <select name="" id="">Customer<option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-    </select>
-    <select name="" id="">Location<option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-    </select>
-    <select name="" id="">Location<option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-      <option value=""></option>
-    </select>
-    <label for=""><input type="number"></label>
-    <div>
-      <button onclick="cancel('Placing Order')">Cancel</button>
-      <button>Add </button>
-      <button type="submit" id="formActionBtn">Place</button>
-    </div>
-  </fieldset>
-</form>
-`
-  form.innerHTML = formingOrderForm;
-}
-
 function cancelAction(whatIsCancled) {
   document.getElementById("formArea").innerHTML = `Canceled ${whatIsCancled}`;
   document.getElementById("tableArea").innerHTML = "";
@@ -47,64 +11,109 @@ function HeyYouGuys(BecauseILikeGoonies) {
   alert(BecauseILikeGoonies);
 }
 
-function MakeTwoTextEntryForm(title, btnLabel, cancelfxn, actionFxn) {
-  let createGenericForm = `<form action="" method="post">
-  <fieldset><legend></legend>
-    <div>
-      <label for="">First Name<input type="text" name="fname" id="fname" placeholder="Bob" required minlength="1"></label>
-      <label for="">Last Name<input type="text" name="lname" id="lname" placeholder="Smith" required minlength="1"></label>
-    </div>
-    <div>
-     <button id="cancelBtn" type="button">Cancel</button>
-      <button id="formActionBtn" type="button" ></button>
-    </div>
-  </fieldset>
-</form>`;
+function LoadCustomerList() {
+  const customers =  [
+    {
+      id: '1',
+      fname: 'Bob',
+      lname: 'Smith'
+  },
+  {id: '2',
+    fname: 'John',
+    lname: 'Jackson'
+  },
+  {id: '3',
+    fname: 'Elvis',
+    lname: 'Presly'
+  },
+  ];
 
-document.getElementById("formArea").innerHTML = createGenericForm;
-document.querySelector("legend").innerText = title;
-document.querySelector("#formActionBtn").innerText = btnLabel;
-document.querySelector("#cancelBtn").onclick = ()=>cancelfxn(title);
-document.querySelector("#formActionBtn").onclick = actionFxn;
-
+  const anchor = document.getElementById('customerList');
+  
+  for(const customer of customers) {
+    debugger;
+    anchor.appendChild(new Option(`${customer.fname} ${customer.lname}`,`${customer.id}`));
+  }
+  
 }
 
-function AddCustomer2Database() {
-  HeyYouGuys('Doing add customer stuff');
-  let fname = document.querySelector("#fname").value;
-  let lname = document.querySelector("#lname").value;
-  document.querySelector("#tableArea").innerHTML = `Customer ${fname} ${lname} added.`;
+//LoadCustomerList();
+
+function LoadLocationList() {
+  const locations = [
+    {
+      storeCode: 'OKCI1'
+    },    
+    {
+      storeCode: 'CHIC5'
+    },    
+    {
+      storeCode: 'LAS1'
+    },    
+    {
+      storeCode: 'KC10'
+    },    
+  ];
+
+  const anchor = document.getElementById('LocationList');
+  for(const location of locations) {
+    debugger;
+    anchor.appendChild(new Option(`${location.storeCode}`));
+  }
 }
 
-function Search4Customer() {
-  HeyYouGuys('Ooooo searching for the holy grail....');
+//LoadLocationList();
+
+
+function LoadProductList() {
+  const products =  [
+    {
+      name: 'hip-hop-a-bot-a-mus'
+    },    
+    {
+      name: 'fish'
+    },    
+    {
+      name: 'pony'
+    },    
+  ];
+
+  const anchor = document.getElementById('ProductList');
+  for(const product of products) {
+    anchor.appendChild(new Option(`${product.name}`,`${product.name}`));
+  }
 }
 
-function MakeDropDownForm(title, btnLabel, cancelfxn, actionFxn, dropDownItems) {
-  let createGenericForm = `<form action="" method="post">
-  <fieldset>
-    <legend></legend>
-    <div id="dropDownMenu">
+//LoadProductList();
 
-    </div>
-    <div>
-      <button id="cancelBtn" type="button">Cancel</button>
-      <button id="formActionBtn" type="button"></button>
-    </div>
-  </fieldset>
-</form>`;
-document.getElementById("formArea").innerHTML = createGenericForm;
-document.querySelector("legend").innerText = title;
-document.querySelector("#formActionBtn").innerText = btnLabel;
-document.querySelector("#cancelBtn").onclick = ()=>cancelfxn(title);
-document.querySelector("#formActionBtn").onclick = actionFxn;
+function LoadOrderList() {
+  const orders =  [
+    {
+      ID: '1',
+      Customer: 'Bob Smith',
+      Location: 'X'
+    },    
+    {
+      ID: '2',
+      Customer: 'Bob Smith',
+      Location: 'Y'
+    },    
+    {
+      ID: '3',
+      Customer: 'Bob Smith',
+      Location: 'Z'    },    
+  ];
 
+  const anchor = document.getElementById('orderList');
+  for(const order of orders) {
+    anchor.appendChild(new Option(`${order.Customer} - ${order.ID}`,`${order.ID}`));
+  }
 }
 
-function ViewOrder() {
-  HeyYouGuys('Viewing an order');
-}
+//LoadOrderList();
 
-function MakeAnOrder() {
-  let createGenericForm = ``;
+function LoadListsForOrders() {
+  LoadProductList();
+  LoadLocationList();
+  LoadCustomerList();
 }

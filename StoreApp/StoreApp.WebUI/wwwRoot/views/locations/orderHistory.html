@@ -8,7 +8,7 @@
   <title>Location Order History</title>
 </head>
 
-<body>
+<body onload="LoadLocationList()">
   <header>
 
   </header>
@@ -16,23 +16,20 @@
     <form action="" method="post">
       <fieldset>
         <legend>Select Location</legend>
-        <div>
-          <select name="" id="">
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value=""></option>
+
+        <label for="LocationList">Location
+          <select name="location" id="LocationList">
           </select>
-        </div>
+        </label>
+
         <div>
           <a href="../../index.html">Cancel</a>
-          <button id="actionBtn" type="button">Add</button>
+          <button id="actionBtn" type="button">Go</button>
         </div>
       </fieldset>
     </form>`
   </main>
-  <script src=""></script>
+  <script src="../../public/JS/storeOperations.js"></script>
 </body>
 
 </html>
