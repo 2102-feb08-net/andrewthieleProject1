@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\StoreApp",
+    "\\StoreApp\\StoreApp.Library",
+    "\\StoreApp\\StoreApp.Tests",
+    "\\StoreApp\\StoreApp.WebUI",
+    "\\StoreApp\\StoreApp.WebUI\\Controllers",
+    "\\StoreApp\\StoreApp.WebUI\\Data",
+    "\\StoreApp\\StoreApp.WebUI\\Models",
+    "\\StoreApp\\StoreApp.WebUI\\Properties",
+    "\\StoreApp\\StoreApp.WebUI\\wwwRoot"
+  ],
+  "SelectedNode": "\\StoreApp\\StoreApp.WebUI\\wwwRoot\\index.html",
+  "PreviewInSolutionExplorer": false
+}
