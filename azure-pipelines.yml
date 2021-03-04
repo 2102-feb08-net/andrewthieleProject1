@@ -16,3 +16,6 @@ variables:
 steps:
 - script: dotnet build ./StoreApp/StoreApp.WebUI --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
+
+-script: dotnet test ./StoreApp/StoreTest --configuration $(buildConfiguration)
+  displayName: 'dotnet TESTING'
