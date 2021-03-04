@@ -12,19 +12,19 @@ using StoreApp.DbAccess.Repositories;
 namespace StoreApp.WebUI.Controllers
 {
   [ApiController]
-  public class CustomerController : ControllerBase
+  public class LocationController : ControllerBase
   {
-    private readonly CustomerRepository _customerRepository;
+    private readonly LocationRepository _locationRepository;
 
-    public CustomerController(CustomerRepository customerRepository)
+    public LocationController(LocationRepository locationRepository)
     {
-      _customerRepository = customerRepository;
+      _locationRepository = locationRepository;
     }
 
-    [HttpGet("api/customers")]
-    public IEnumerable<StoreApp.Library.Models.Customer> GetCustomers()
+    [HttpGet("api/locations")]
+    public IEnumerable<StoreApp.Library.Models.Location> GetLocations()
     {
-      return _customerRepository.GetCustomers();
+      return _locationRepository.GetLocations();
     }
 
 

@@ -28,6 +28,8 @@ function LoadCustomerList() {
   },
   ];
 
+  fetch(`/api/hello`);
+
   const anchor = document.getElementById('customerList');
   
   for(const customer of customers) {

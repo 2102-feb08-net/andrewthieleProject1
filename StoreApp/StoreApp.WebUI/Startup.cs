@@ -7,10 +7,17 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using StoreApp.Library.Models;
+using StoreApp.DbAccess;
+using StoreApp.DbAccess.Entities;
+using StoreApp.DbAccess.Repositories;
+
 
 namespace StoreApp.WebUI
 {
@@ -26,6 +33,18 @@ namespace StoreApp.WebUI
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      string filelocation = "C:/Revature/storeApp-connection-string.txt";
+      string connectionString = File.ReadAllText(filelocation);
+
+      services.AddDbContext<StoreProj0Context>(options =>
+      {
+        options.UseSqlServer(connectionString);
+      });
+
+      // ?  Add Scoped methods??
+      services.AddScoped<CustomerRepository>();
+      // services.AddScoped<ILocationRepository, LocationRepository>();
+      services.AddScoped<LocationRepository>();
 
       services.AddControllers();
       services.AddSwaggerGen(c =>
