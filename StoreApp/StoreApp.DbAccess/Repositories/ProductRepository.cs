@@ -10,31 +10,31 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StoreApp.DbAccess.Repositories
 {
-  public class CustomerRepository// : ICustomerRepository
+  public class ProductRepository// : IProductRepository
   {
     private readonly StoreProj0Context _customers;
 
-    public CustomerRepository(StoreProj0Context customers)
+    public ProductRepository(StoreProj0Context customers)
     {
       _customers = customers;
     }
 
-    public IEnumerable<StoreApp.Library.Models.Customer> GetCustomers()
+    public IEnumerable<StoreApp.Library.Models.Product> GetProducts()
     {
-      var query = _customers.Customers;
+      var query = _customers.Products;
       if (query != null)
       {
-        return query.Select(c => new StoreApp.Library.Models.Customer
+        return query.Select(c => new StoreApp.Library.Models.Product
         {
           Id = c.Id,
-          FirstName = c.FirstName,
-          LastName = c.LastName,
-          Balance = c.Balance
+          Name = c.Name,
+          Description = c.Description,
+          Price = (decimal)c.Price
         }).ToList();
       }
       else
       {
-        return new List<StoreApp.Library.Models.Customer>();
+        return new List<StoreApp.Library.Models.Product>();
       }
     }
 
@@ -52,10 +52,10 @@ namespace StoreApp.DbAccess.Repositories
     //   _customers.Add();
     // }
 
-    // public void Save()
-    // {
-    //   _customers.SaveChanges();
-    // }
+    public void Save()
+    {
+      _customers.SaveChanges();
+    }
 
   }
 }

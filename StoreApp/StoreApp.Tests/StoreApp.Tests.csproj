@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\StoreApp.Library\StoreApp.Library.csproj" />
-    <ProjectReference Include="..\StoreApp.WebUI\StoreApp.WebUI.csproj" />
   </ItemGroup>
 
 </Project>
