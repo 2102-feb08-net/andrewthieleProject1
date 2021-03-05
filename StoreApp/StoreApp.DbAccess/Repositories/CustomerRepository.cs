@@ -38,16 +38,16 @@ namespace StoreApp.DbAccess.Repositories
       }
     }
 
-    // public StoreApp.Library.Models.Customer GetCustomerById(int id)
-    // {
-    //   return
-    // }
-    // public StoreApp.Library.Models.Customer GetCustomerByFullName(string firstName, string lastName)
-    // {
-    //   return new StoreApp.Library.Models.Customer(firstName, lastName);
-    // }
+    public StoreApp.Library.Models.Customer GetCustomerById(int id)
+    {
+      return new Library.Models.Customer("Bob", "Jones");
+    }
+    public StoreApp.Library.Models.Customer GetCustomerByFullName(string firstName, string lastName)
+    {
+      return new StoreApp.Library.Models.Customer(firstName, lastName);
+    }
 
-    public void AddCustomer(StoreApp.DbAccess.Entities.Customer customer)
+    public void AddCustomer(StoreApp.Library.Models.Customer customer)
     {
       _customers.Customers.Add(new StoreApp.DbAccess.Entities.Customer
       {

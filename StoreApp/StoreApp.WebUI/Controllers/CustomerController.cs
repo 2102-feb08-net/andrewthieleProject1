@@ -28,12 +28,20 @@ namespace StoreApp.WebUI.Controllers
     }
 
     [HttpPost("api/addCustomer")]
-    public void AddCustomer(StoreApp.DbAccess.Entities.Customer customer)
+    public void AddCustomer(StoreApp.Library.Models.Customer customer)
     {
 
       _customerRepository.AddCustomer(customer);
       _customerRepository.Save();
 
+    }
+
+    [HttpGet("api/searchCustomer")]
+    public StoreApp.Library.Models.Customer SearchedAndFoundCustomer(string firstName, string lastName)
+    {
+//      _customerRepository.SearchForFirst(firstName, lastName);
+
+      return new Library.Models.Customer();
     }
 
 
