@@ -53,7 +53,8 @@ steps:
   displayName: dotnet publish
   inputs:
     command: 'publish'
-    publishWebProjects: false
+    publishWebProjects: true
+    # publishWebProjects: false
     projects: 'StoreApp/StoreApp.WebUI'
     zipAfterPublish: true
 - task: AzureRmWebAppDeployment@4
