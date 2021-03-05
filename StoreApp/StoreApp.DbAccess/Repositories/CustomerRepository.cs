@@ -47,15 +47,20 @@ namespace StoreApp.DbAccess.Repositories
     //   return new StoreApp.Library.Models.Customer(firstName, lastName);
     // }
 
-    // public void AddCustomer(string firstName, string LastName)
-    // {
-    //   _customers.Add();
-    // }
+    public void AddCustomer(StoreApp.DbAccess.Entities.Customer customer)
+    {
+      _customers.Customers.Add(new StoreApp.DbAccess.Entities.Customer
+      {
+        FirstName = customer.FirstName,
+        LastName = customer.LastName,
+        Balance = 0M
+      });
+    }
 
-    // public void Save()
-    // {
-    //   _customers.SaveChanges();
-    // }
+    public void Save()
+    {
+      _customers.SaveChanges();
+    }
 
   }
 }

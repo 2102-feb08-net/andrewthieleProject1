@@ -13,6 +13,18 @@ namespace StoreApp.Library.Models
 
     public Customer() { }
 
+    public Customer(string fname, string lname)
+    {
+      FirstName = fname;
+      LastName = lname;
+    }
+    public Customer(string fname, string lname, decimal balance)
+    {
+
+      FirstName = fname;
+      LastName = lname;
+      Balance = balance;
+    }
     public Customer(int id, string fname, string lname, decimal balance)
     {
       Id = id;

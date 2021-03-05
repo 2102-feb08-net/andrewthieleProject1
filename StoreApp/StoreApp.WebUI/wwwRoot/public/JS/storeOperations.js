@@ -83,22 +83,29 @@ function LoadLocationList() {
 
 
 function LoadProductList() {
-  const products =  [
-    {
-      name: 'hip-hop-a-bot-a-mus'
-    },    
-    {
-      name: 'fish'
-    },    
-    {
-      name: 'pony'
-    },    
-  ];
+  // const products =  [
+  //   {
+  //     name: 'hip-hop-a-bot-a-mus'
+  //   },    
+  //   {
+  //     name: 'fish'
+  //   },    
+  //   {
+  //     name: 'pony'
+  //   },    
+  // ];
 
-  const anchor = document.getElementById('ProductList');
-  for(const product of products) {
-    anchor.appendChild(new Option(`${product.name}`,`${product.name}`));
-  }
+  // const anchor = document.getElementById('ProductList');
+  // for(const product of products) {
+  //   anchor.appendChild(new Option(`${product.name}`,`${product.name}`));
+  // }
+  return fetch(`/api/products`).then(response => {
+    if(!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+    return response.json();
+  });
+
 }
 
 //LoadProductList();

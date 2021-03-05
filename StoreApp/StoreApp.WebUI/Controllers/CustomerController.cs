@@ -27,6 +27,15 @@ namespace StoreApp.WebUI.Controllers
       return _customerRepository.GetCustomers();
     }
 
+    [HttpPost("api/addCustomer")]
+    public void AddCustomer(StoreApp.DbAccess.Entities.Customer customer)
+    {
+
+      _customerRepository.AddCustomer(customer);
+      _customerRepository.Save();
+
+    }
+
 
 
 

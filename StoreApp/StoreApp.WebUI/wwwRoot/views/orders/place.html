@@ -11,39 +11,39 @@
   <title>Place Order</title>
 </head>
 
-<body onload="LoadListsForOrders()">
+<body>
   <header>
 
   </header>
   <main>
-    <form action="" method="post">
-      <fieldset>
-        <legend>Place Order</legend>
-
-        <label for="customerList">Customer
-          <select name="customer" id="customerList">
-          </select>
-        </label>
-
-        <label for="LocationList">Location
-          <select name="location" id="LocationList">
-          </select>
-        </label>
-        <label for="ProductList">Product
-          <select name="product" id="ProductList">
-          </select>
-        </label>
-
-        <div>
-          <label for="quantity">Quantity<input type="number" name="quantity" id="quantity" placeholder="0" min="0"
-              max=50></label>
-        </div>
-        <div>
-          <a href="../../index.html">Cancel</a>
-          <button id="actionBtn" type="button">Add</button>
-        </div>
-      </fieldset>
-    </form>`
+    <div class="container">
+      <form action="" method="post">
+        <fieldset>
+          <legend>Place Order</legend>
+          <label for="customerList">Customer
+            <select name="customer" id="customerList">
+            </select>
+          </label>
+          <label for="LocationList">Location
+            <select name="location" id="LocationList">
+            </select>
+          </label>
+          <div>
+            <label for="ProductList">Product
+              <select name="product" id="ProductList">
+              </select>
+            </label>
+            <label for="quantity">Quantity<input type="number" name="quantity" id="quantity" placeholder="0" min="0"
+                max=50></label>
+          </div>
+          <div>
+            <a href="../../index.html">Cancel</a>
+            <button id="actionBtn" type="button">Add</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>`
+    <div class="container" id="orderResults" hidden></div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -52,6 +52,7 @@
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
     crossorigin="anonymous"></script>
   <script src="../../public/JS/storeOperations.js"></script>
+  <script src="../../public/JS/placeOrder.js"></script>
 </body>
 
 </html>

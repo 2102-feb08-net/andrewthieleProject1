@@ -16,22 +16,24 @@
 
   </header>
   <main>
-    <form action="" method="post">
-      <fieldset>
-        <legend>Select Location</legend>
-
-        <label for="LocationList">Location
-          <select name="location" id="LocationList">
-          </select>
-        </label>
-
-        <div>
-          <a href="../../index.html">Cancel</a>
-          <button id="actionBtn" type="button">Go</button>
-        </div>
-      </fieldset>
-    </form>
-    <div id="#Location Order History" hidden>
+    <div class="container">
+      <form action="" method="post">
+        <fieldset>
+          <legend>Select Location</legend>
+          <div class="form-group">
+            <label for="LocationList">Location
+              <select name="location" id="LocationList">
+              </select>
+            </label>
+          </div>
+          <div>
+            <button class="btn btn-link"><a href="../../index.html">Cancel</a></button>
+            <button id="actionBtn" type="button">Go</button>
+          </div>
+        </fieldset>
+      </form>
+    </div>
+    <div id="#Location Order History" class="container" hidden>
       <table>
         <thead>
           <tr></tr>
