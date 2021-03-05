@@ -14,29 +14,52 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: UseDotNet@2
-  displayName: dotnet sdk
+- task: SonarCloudPrepare@1
   inputs:
-    packageType: 'sdk'
-    version: '5.0.x'
-- task: UseDotNet@2
-  inputs:
-    packageType: 'runtime'
-    version: '2.x'
-# - task: SonarCloudPrepare@1
-#   displayName: sonar prepare analysis
-#   inputs:
-#     SonarCloud: 'sonarcloud-escalonn'
-#     organization: '2102-feb08-net'
-#     scannerMode: 'MSBuild'
-#     projectKey: '2102-feb08-net_trainer-code'
-#     projectName: 'EmailApp'
-#     extraProperties: 'sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml'
+    SonarCloud: 'proj1'
+    organization: '2102-feb08-net'
+    scannerMode: 'MSBuild'
+    projectKey: '2102-feb08-net_andrewthieleProject1'
+    projectName: 'proj1'
+    extraProperties: 'sonar.cs.opencover.reportsPaths=$(Agent.TempDirectory)/*/coverage.opencover.xml'
 
 
 
-- script: dotnet build ./StoreApp/StoreApp.WebUI --configuration $(buildConfiguration)
+- script: dotnet build ./StoreApp/ --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 
-- script: dotnet test ./StoreApp/StoreApp.Tests --configuration $(buildConfiguration)
-  displayName: ' dotnet test for valid first name'
+- task: DotNetCoreCLI@2
+  displayName: dotnet test
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration) --collect "xplat code coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=cobertura,opencover'
+    workingDirectory: './StoreApp/StoreApp.Tests'
+
+- task: SonarCloudAnalyze@1
+  displayName: Sonar cloud run baby run
+
+- task: SonarCloudPublish@1
+  displayName: Sonar CLoud Quality gate
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: PublishCodeCoverageResults@1
+  displayName: publish code coverage report
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '$(Agent.TempDirectory)/*/coverage.cobertura.xml'
+
+- task: DotNetCoreCLI@2
+  displayName: dotnet publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: './StoreApp/StoreApp.WebUI'
+    zipAfterPublish: true
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(efb7f73b-626f-4d34-ba28-ea6f68edcbc9)'
+    appType: 'webApp'
+    WebAppName: '2102andrewthiele-storeproj1'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
