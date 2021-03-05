@@ -54,7 +54,7 @@ steps:
   inputs:
     command: 'publish'
     publishWebProjects: false
-    projects: './StoreApp/StoreApp.WebUI'
+    projects: 'StoreApp/StoreApp.WebUI'
     zipAfterPublish: true
 - task: AzureRmWebAppDeployment@4
   inputs:
