@@ -41,5 +41,40 @@ namespace StoreApp.Library.Models
       get => _balance;
       set => _balance = value;
     }
+    public bool IsFirstNameOkay()
+    {
+      string forbbidenChars = "!@#$%^&*()";
+
+      foreach (char i in _firstName)
+      {
+        foreach (char j in forbbidenChars)
+        {
+          if (i == j)
+          {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    public bool IsLastNameOkay()
+    {
+      string forbbidenChars = "!@#$%^&*()";
+
+      foreach (char i in _lastName)
+      {
+        foreach (char j in forbbidenChars)
+        {
+          if (i == j)
+          {
+            return false;
+          }
+        }
+      }
+
+      return true;
+    }
   }
 }
