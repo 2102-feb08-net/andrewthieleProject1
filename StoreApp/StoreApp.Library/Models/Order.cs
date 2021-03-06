@@ -11,6 +11,36 @@ namespace StoreApp.Library.Models
     private int _locationId;
 
     private HashSet<Orderline> _ordereditems;
+
+    public Order() { }
+    public Order(int customerId, DateTimeOffset timeOfOrder, int locationId)
+    {
+      _customerId = customerId;
+      _timeOfOrder = timeOfOrder;
+      _locationId = locationId;
+    }
+    public Order(int customerId, DateTimeOffset timeOfOrder, int locationId, HashSet<Orderline> orderedItems)
+    {
+      _customerId = customerId;
+      _timeOfOrder = timeOfOrder;
+      _locationId = locationId;
+      _ordereditems = orderedItems;
+    }
+    public Order(int id, int customerId, DateTimeOffset timeOfOrder, int locationId)
+    {
+      _id = id;
+      _customerId = customerId;
+      _timeOfOrder = timeOfOrder;
+      _locationId = locationId;
+    }
+    public Order(int id, int customerId, DateTimeOffset timeOfOrder, int locationId, HashSet<Orderline> orderedItems)
+    {
+      _id = id;
+      _customerId = customerId;
+      _timeOfOrder = timeOfOrder;
+      _locationId = locationId;
+      _ordereditems = orderedItems;
+    }
     public int Id
     {
       get => _id;

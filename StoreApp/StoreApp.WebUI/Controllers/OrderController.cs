@@ -23,24 +23,34 @@ namespace StoreApp.WebUI.Controllers
 
     [HttpGet("api/orders")]
     public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
+    // public IEnumerable<StoreApp.DbAccess.Entities.Order> GetOrders()
     {
       return _orderRepository.GetOrders();
     }
 
-    // [HttpPost("api/addOrder")]
-    // public void AddOrder(StoreApp.Library.Models.Order order)
-    // {
-    //   _orderRepository.AddOrder(order);
-    //   _orderRepository.Save();
-    // }
+    [HttpGet("api/order/{id}")]
+    public StoreApp.Library.Models.Order GetOrderByIts(int id)
+    {
+      return _orderRepository.GetOrderById(id);
+    }
 
-    // [HttpGet("api/searchOrder")]
-    // public StoreApp.Library.Models.Order SearchedAndFoundOrder(string firstName, string lastName)
-    // {
-    //        _orderRepository.SearchForFirst(firstName, lastName);
+    [HttpGet("api/order/customer/{id}")]
+    public List<StoreApp.Library.Models.Order> GetOrdersByCustomerId(int id)
+    {
+      return _orderRepository.GetOrdersByCustomerId(id);
+    }
 
-    //   return new Library.Models.Order();
-    // }
+    [HttpGet("api/order/location/{id}")]
+    public Library.Models.Order GetOrdersByLocationId(int id)
+    {
+      return new Library.Models.Order();
+    }
 
+    [HttpPost("api/addOrder")]
+    public void AddOrder(StoreApp.Library.Models.Order order)
+    {
+      // _orderRepository.AddOrder(order);
+      _orderRepository.Save();
+    }
   }
 }

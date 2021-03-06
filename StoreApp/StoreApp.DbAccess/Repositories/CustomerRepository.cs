@@ -40,7 +40,20 @@ namespace StoreApp.DbAccess.Repositories
 
     public StoreApp.Library.Models.Customer GetCustomerById(int id)
     {
-      return new Library.Models.Customer("Bob", "Jones");
+      var query = _customers.Customers.Find(id);
+      if (query != null)
+      {
+        return new Library.Models.Customer
+        {
+          FirstName = query.FirstName,
+          LastName = query.LastName,
+          Balance = query.Balance
+        };
+      }
+      else
+      {
+        throw new Exception("Customer does not exist");
+      }
     }
     public StoreApp.Library.Models.Customer SearchForFirst(string firstName, string lastName)
     {

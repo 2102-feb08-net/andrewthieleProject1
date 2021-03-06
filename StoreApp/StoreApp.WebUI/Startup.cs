@@ -46,6 +46,7 @@ namespace StoreApp.WebUI
       // services.AddScoped<ILocationRepository, LocationRepository>();
       services.AddScoped<LocationRepository>();
       services.AddScoped<ProductRepository>();
+      services.AddScoped<OrderRepository>();
       // ? DO I NEED MORE REPOSITORIES???
 
       services.AddControllers();

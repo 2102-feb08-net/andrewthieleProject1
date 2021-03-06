@@ -27,8 +27,5 @@ namespace StoreApp.WebUI.Controllers
       return _locationRepository.GetLocations();
     }
 
-
-
-
   }
 }

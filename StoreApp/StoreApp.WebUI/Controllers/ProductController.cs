@@ -26,9 +26,5 @@ namespace StoreApp.WebUI.Controllers
     {
       return _productRepository.GetProducts();
     }
-
-
-
-
   }
 }

@@ -7,6 +7,7 @@ namespace StoreApp.Library.Models
   {
     private int _id;
     private int _storeId;
+    // private Location _location();
     private int _productId;
     private int _quantity;
 

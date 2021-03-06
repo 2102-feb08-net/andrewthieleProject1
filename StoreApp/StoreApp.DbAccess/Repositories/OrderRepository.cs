@@ -20,8 +20,10 @@ namespace StoreApp.DbAccess.Repositories
     }
 
     public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
+    // public IEnumerable<StoreApp.DbAccess.Entities.Order> GetOrders()
     {
       var query = _orders.Orders;
+
       var orderlines = _orders.Orderitems;
 
       if (orderlines != null)
@@ -38,6 +40,7 @@ namespace StoreApp.DbAccess.Repositories
           CustomerId = (int)o.CustomerId,
           LocationId = (int)o.LocationId
 
+
         }).ToList();
       }
       else
@@ -46,22 +49,167 @@ namespace StoreApp.DbAccess.Repositories
       }
     }
 
-    // public StoreApp.Library.Models.Order GetOrderById(int id)
-    // {
-    //   return _orders.Orders.Select(o => o.Id = id);
-    // }
-    // public StoreApp.Library.Models.Order GetOrderByFullName(string firstName, string lastName)
-    // {
-    //   return new StoreApp.Library.Models.Order(firstName, lastName);
-    // }
+    public StoreApp.Library.Models.Order GetOrderById(int id)
+    {
+      var query = _orders.Orders.Find(id);
+      var items = _orders.Orderitems.Select(i => i.OrderId == id);
+      var allItemsInOrder = new HashSet<Orderline>();
+      foreach (var item in items)
+      {
+        var orderedItem = new Orderline();
+      }
 
-    // public void AddOrder(StoreApp.Library.Models.Order order)
-    // {
-    //   _orders.Orders.Add(new StoreApp.DbAccess.Entities.Order
-    //   {
+      return new Library.Models.Order
+      {
+        Id = query.Id,
+        CustomerId = (int)query.CustomerId,
+        TimeOfOrder = query.TimeOfOrder,
+        OrderItems = allItemsInOrder,
+        LocationId = (int)query.LocationId
+      };
 
-    //   });
-    // }
+    }
+
+    public List<StoreApp.Library.Models.Order> GetOrdersByCustomerId(int customerId)
+    {
+      var customerOrderHistory = new List<StoreApp.Library.Models.Order>();
+
+      var ordersByCustomer = _orders.Orders
+      .Include(o => o.Customer)
+      .Include(o => o.Location)
+      .Include(o => o.Orderitems)
+        .ThenInclude(oi => oi.Product)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Quantity)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Id)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      //   .ThenInclude(p => p.Name)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      //   .ThenInclude(p => p.Price)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Quantity)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      .Where(o => o.CustomerId == customerId);
+      // .GroupBy(o => o.CustomerId);
+
+
+      var itemsInCustomerOrder = new HashSet<StoreApp.Library.Models.Orderline>();
+
+      foreach (var order in ordersByCustomer)
+      {
+        foreach (var orderline in order.Orderitems)
+        {
+          itemsInCustomerOrder.Add(new StoreApp.Library.Models.Orderline
+          {
+            Id = orderline.Id,
+            OrderId = (int)orderline.OrderId,
+            ProductId = (int)orderline.ProductId,
+            Quantity = orderline.Quantity
+
+          });
+        }
+        customerOrderHistory.Add(new StoreApp.Library.Models.Order
+        {
+
+          Id = (int)order.Id,
+          CustomerId = (int)order.CustomerId,
+          TimeOfOrder = order.TimeOfOrder,
+          LocationId = (int)order.LocationId,
+          OrderItems = itemsInCustomerOrder
+        });
+      }
+
+      return customerOrderHistory;
+    }
+
+    public List<StoreApp.Library.Models.Order>
+    GetOrdersByLocationId(int locationId)
+    {
+      var locationOrderHistory = new List<StoreApp.Library.Models.Order>();
+
+      var ordersByCustomer = _orders.Orders
+      .Include(o => o.Customer)
+      .Include(o => o.Location)
+      .Include(o => o.Orderitems)
+        .ThenInclude(oi => oi.Product)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Quantity)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Id)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      //   .ThenInclude(p => p.Name)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      //   .ThenInclude(p => p.Price)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Quantity)
+      // .Include(o => o.Orderitems)
+      //   .ThenInclude(oi => oi.Product)
+      .Where(o => o.LocationId == locationId);
+      // .GroupBy(o => o.CustomerId);
+
+
+      var itemsInLocationOrder = new HashSet<StoreApp.Library.Models.Orderline>();
+
+      foreach (var order in ordersByCustomer)
+      {
+        foreach (var orderline in order.Orderitems)
+        {
+          itemsInLocationOrder.Add(new StoreApp.Library.Models.Orderline
+          {
+            Id = orderline.Id,
+            OrderId = (int)orderline.OrderId,
+            ProductId = (int)orderline.ProductId,
+            Quantity = orderline.Quantity
+
+          });
+        }
+        locationOrderHistory.Add(new StoreApp.Library.Models.Order
+        {
+
+          Id = (int)order.Id,
+          CustomerId = (int)order.CustomerId,
+          TimeOfOrder = order.TimeOfOrder,
+          LocationId = (int)order.LocationId,
+          OrderItems = itemsInLocationOrder
+        });
+      }
+
+      return locationOrderHistory;
+    }
+
+    public void AddOrder(StoreApp.Library.Models.Order order)
+    {
+      // order.OrderItems;
+
+      var orderItems = new HashSet<StoreApp.DbAccess.Entities.Orderitem>();
+      foreach (var orderLine in order.OrderItems)
+      {
+        orderItems.Add(new Orderitem
+        {
+          Id = orderLine.Id,
+          OrderId = orderLine.OrderId,
+          ProductId = orderLine.ProductId,
+          Quantity = orderLine.Quantity
+        });
+      }
+
+
+      _orders.Orders.Add(new StoreApp.DbAccess.Entities.Order
+      {
+        Id = (int)order.Id,
+        CustomerId = order.CustomerId,
+        TimeOfOrder = DateTimeOffset.Now,
+        Orderitems = orderItems
+
+      });
+      _orders.SaveChanges();
+    }
 
     public void Save()
     {

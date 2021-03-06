@@ -40,19 +40,6 @@ namespace StoreApp.DbAccess.Repositories
       }
     }
 
-    // public StoreApp.Library.Models.Customer GetCustomerById(int id)
-    // {
-    //   return
-    // }
-    // public StoreApp.Library.Models.Customer GetCustomerByFullName(string firstName, string lastName)
-    // {
-    //   return new StoreApp.Library.Models.Customer(firstName, lastName);
-    // }
-
-    // public void AddCustomer(string firstName, string LastName)
-    // {
-    //   _customers.Add();
-    // }
 
     public void Save()
     {
