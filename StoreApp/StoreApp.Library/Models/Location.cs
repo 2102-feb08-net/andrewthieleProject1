@@ -10,9 +10,23 @@ namespace StoreApp.Library.Models
     private string _state;
 
     public Location() { }
+
+    public Location(string code, string address1, string address2, string city, string state)
+    {
+      Code = code;
+      Address1 = address1;
+      Address2 = address2;
+      City = city;
+      State = state;
+    }
     public Location(int id, string code, string address1, string address2, string city, string state)
     {
-
+      Id = id;
+      Code = code;
+      Address1 = address1;
+      Address2 = address2;
+      City = city;
+      State = state;
     }
     public int Id
     {

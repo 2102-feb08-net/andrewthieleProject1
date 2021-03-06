@@ -7,8 +7,22 @@ namespace StoreApp.Library.Models
   {
     private int _id;
     private int _storeId;
-    private string _product;
+    private int _productId;
     private int _quantity;
+
+    public Inventory(int id, int storeId, int productId, int quantity)
+    {
+      Id = id;
+      StoreId = storeId;
+      ProductId = productId;
+      Quantity = quantity;
+    }
+    public Inventory(int storeId, int productId, int quantity)
+    {
+      StoreId = storeId;
+      ProductId = productId;
+      Quantity = quantity;
+    }
     public int Id
     {
       get => _id;
@@ -20,13 +34,13 @@ namespace StoreApp.Library.Models
       set => _storeId = value;
     }
 
-    public string Product
+    public int ProductId
     {
-      get => _product;
-      set => _product = value;
+      get => _productId;
+      set => _productId = value;
     }
 
-    public int quantity
+    public int Quantity
     {
       get => _quantity;
       set => _quantity = value;

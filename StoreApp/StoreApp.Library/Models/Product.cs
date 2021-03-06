@@ -20,6 +20,13 @@ namespace StoreApp.Library.Models
       _price = price;
 
     }
+    public Product(string name, string description, decimal price)
+    {
+      _name = name;
+      _description = description;
+      _price = price;
+
+    }
 
     public int Id
     {
