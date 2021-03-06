@@ -12,52 +12,61 @@ namespace StoreApp.DbAccess.Repositories
 {
   public class OrderRepository// : IOrderRepository
   {
-    private readonly StoreProj0Context _customers;
+    private readonly StoreProj0Context _orders;
 
-    public OrderRepository(StoreProj0Context customers)
+    public OrderRepository(StoreProj0Context orders)
     {
-      _customers = customers;
+      _orders = orders;
     }
 
-    // public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
+    public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
+    {
+      var query = _orders.Orders;
+      var orderlines = _orders.Orderitems;
+
+      if (orderlines != null)
+      {
+        var orderline = new Orderline();
+      }
+
+      if (query != null)
+      {
+        HashSet<Orderline> itemsInOrder = new HashSet<Orderline>();
+        return query.Select(o => new StoreApp.Library.Models.Order
+        {
+          Id = o.Id,
+          CustomerId = (int)o.CustomerId,
+          LocationId = (int)o.LocationId
+
+        }).ToList();
+      }
+      else
+      {
+        return new List<StoreApp.Library.Models.Order>();
+      }
+    }
+
+    // public StoreApp.Library.Models.Order GetOrderById(int id)
     // {
-    //   var query = _customers.Orders;
-    //   if (query != null)
-    //   {
-    //     return query.Select(c => new StoreApp.Library.Models.Order
-    //     {
-    //       Id = c.Id,
-    //       FirstName = c.FirstName,
-    //       LastName = c.LastName,
-    //       Balance = c.Balance
-    //     }).ToList();
-    //   }
-    //   else
-    //   {
-    //     return new List<StoreApp.Library.Models.Order>();
-    //   }
+    //   return _orders.Orders.Select(o => o.Id = id);
+    // }
+    // public StoreApp.Library.Models.Order GetOrderByFullName(string firstName, string lastName)
+    // {
+    //   return new StoreApp.Library.Models.Order(firstName, lastName);
     // }
 
-    //   public StoreApp.Library.Models.Order GetOrderById(int id)
+    // public void AddOrder(StoreApp.Library.Models.Order order)
+    // {
+    //   _orders.Orders.Add(new StoreApp.DbAccess.Entities.Order
     //   {
-    //     return new Library.Models.Order("Bob", "Jones");
-    //   }
-    //   public StoreApp.Library.Models.Order GetOrderByFullName(string firstName, string lastName)
-    //   {
-    //     return new StoreApp.Library.Models.Order(firstName, lastName);
-    //   }
 
-    //   public void AddOrder(StoreApp.Library.Models.Order customer)
-    //   {
-    //     _customers.Orders.Add(new StoreApp.DbAccess.Entities.Order
-    //     {
-    //     });
-    //   }
+    //   });
+    // }
 
-    //   public void Save()
-    //   {
-    //     _customers.SaveChanges();
-    //   }
+    public void Save()
+    {
+      _orders.SaveChanges();
+    }
 
   }
 }

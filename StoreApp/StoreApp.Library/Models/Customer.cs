@@ -70,7 +70,6 @@ namespace StoreApp.Library.Models
 
       return true;
     }
-
     public bool IsLastNameOkay()
     {
       string forbbidenChars = "!@#$%^&*()";
@@ -85,7 +84,6 @@ namespace StoreApp.Library.Models
           }
         }
       }
-
       return true;
     }
   }

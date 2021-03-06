@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StoreApp.Library.Interfaces;
 using StoreApp.DbAccess.Repositories;
+using System.Net.Http;
+using System.Net;
 
 namespace StoreApp.WebUI.Controllers
 {
@@ -30,22 +32,14 @@ namespace StoreApp.WebUI.Controllers
     [HttpPost("api/addCustomer")]
     public void AddCustomer(StoreApp.Library.Models.Customer customer)
     {
-
       _customerRepository.AddCustomer(customer);
       _customerRepository.Save();
-
     }
 
-    [HttpGet("api/searchCustomer")]
+    [HttpGet("api/searchCustomer/{firstName}/{lastName}")]
     public StoreApp.Library.Models.Customer SearchedAndFoundCustomer(string firstName, string lastName)
     {
-//      _customerRepository.SearchForFirst(firstName, lastName);
-
-      return new Library.Models.Customer();
+      return _customerRepository.SearchForFirst(firstName, lastName);
     }
-
-
-
-
   }
 }

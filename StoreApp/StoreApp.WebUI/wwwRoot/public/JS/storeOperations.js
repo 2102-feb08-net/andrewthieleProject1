@@ -15,21 +15,6 @@ function HeyYouGuys(BecauseILikeGoonies) {
 }
 
 function LoadCustomerList() {
-  // const customers =  [
-  //   {
-  //     id: '1',
-  //     fname: 'Bob',
-  //     lname: 'Smith'
-  // },
-  // {id: '2',
-  //   fname: 'John',
-  //   lname: 'Jackson'
-  // },
-  // {id: '3',
-  //   fname: 'Elvis',
-  //   lname: 'Presly'
-  // },
-  // ];
 
   return fetch(`/api/customers`).then(response => {
     if(!response.ok) {
@@ -38,38 +23,11 @@ function LoadCustomerList() {
     return response.json();
   });
 
-  // const anchor = document.getElementById('customerList');
-  
-  // for(const customer of customers) {
-  //   debugger;
-  //   anchor.appendChild(new Option(`${customer.fname} ${customer.lname}`,`${customer.id}`));
-  // }
   
 }
 
-//LoadCustomerList();
 
 function LoadLocationList() {
-  // const locations = [
-  //   {
-  //     storeCode: 'OKCI1'
-  //   },    
-  //   {
-  //     storeCode: 'CHIC5'
-  //   },    
-  //   {
-  //     storeCode: 'LAS1'
-  //   },    
-  //   {
-  //     storeCode: 'KC10'
-  //   },    
-  // ];
-
-  // const anchor = document.getElementById('LocationList');
-  // for(const location of locations) {
-  //   debugger;
-  //   anchor.appendChild(new Option(`${location.storeCode}`));
-  // }
 
   return fetch(`/api/locations`).then(response => {
     if(!response.ok) {
@@ -83,22 +41,6 @@ function LoadLocationList() {
 
 
 function LoadProductList() {
-  // const products =  [
-  //   {
-  //     name: 'hip-hop-a-bot-a-mus'
-  //   },    
-  //   {
-  //     name: 'fish'
-  //   },    
-  //   {
-  //     name: 'pony'
-  //   },    
-  // ];
-
-  // const anchor = document.getElementById('ProductList');
-  // for(const product of products) {
-  //   anchor.appendChild(new Option(`${product.name}`,`${product.name}`));
-  // }
   return fetch(`/api/products`).then(response => {
     if(!response.ok) {
       throw new Error(`Network response was not ok (${response.status})`);
@@ -108,7 +50,6 @@ function LoadProductList() {
 
 }
 
-//LoadProductList();
 
 function LoadOrderList() {
   const orders =  [
@@ -134,10 +75,34 @@ function LoadOrderList() {
   }
 }
 
-//LoadOrderList();
 
 function LoadListsForOrders() {
-  LoadProductList();
   LoadLocationList();
   LoadCustomerList();
+}
+
+function sendCustomer(firstName, lastName) {
+  return fetch(`/api/searchCustomer/${firstName}/${lastName}`).then(response => 
+   {
+    if (!response.ok) {
+      const RESULTS_AREA = document.getElementById("searchResultsArea");
+      RESULTS_AREA.innerHTML = `<h3> Customer NOT found`;
+
+      throw new Error(`Network response was not ok (${response.status})`);
+
+    }
+return response.json()})
+         
+  .then(customer => {
+    if (customer === null)
+    {
+      
+    }
+    else {
+      const RESULTS_AREA = document.getElementById("searchResultsArea");
+      RESULTS_AREA.innerHTML = `<h3> Customer found:<br><ul><li>First Name: ${customer.firstName}</li><li>Last Name ${customer.lastName}</li><li>Balance: ${customer.balance}</li></ul>`;
+  
+  }
+});
+  
 }

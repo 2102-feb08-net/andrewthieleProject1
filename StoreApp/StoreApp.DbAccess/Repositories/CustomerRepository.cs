@@ -42,9 +42,24 @@ namespace StoreApp.DbAccess.Repositories
     {
       return new Library.Models.Customer("Bob", "Jones");
     }
-    public StoreApp.Library.Models.Customer GetCustomerByFullName(string firstName, string lastName)
+    public StoreApp.Library.Models.Customer SearchForFirst(string firstName, string lastName)
     {
-      return new StoreApp.Library.Models.Customer(firstName, lastName);
+      var query = _customers.Customers.Where(c => c.FirstName == firstName && c.LastName == lastName).First();
+
+      if (query != null)
+      {
+        return new Library.Models.Customer
+        {
+          FirstName = query.FirstName,
+          LastName = query.LastName,
+          Balance = query.Balance
+        };
+      }
+      else
+      {
+        // return new StoreApp.Library.Models.Customer(firstName, lastName);
+        throw new Exception("Customer does not exist");
+      }
     }
 
     public void AddCustomer(StoreApp.Library.Models.Customer customer)

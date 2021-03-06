@@ -21,31 +21,26 @@ namespace StoreApp.WebUI.Controllers
       _orderRepository = orderRepository;
     }
 
-    // [HttpGet("api/orders")]
-    // public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
-    // {
-    //   return _orderRepository.GetOrders();
-    // }
+    [HttpGet("api/orders")]
+    public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
+    {
+      return _orderRepository.GetOrders();
+    }
 
     // [HttpPost("api/addOrder")]
     // public void AddOrder(StoreApp.Library.Models.Order order)
     // {
-
     //   _orderRepository.AddOrder(order);
     //   _orderRepository.Save();
-
     // }
 
-    [HttpGet("api/searchOrder")]
-    public StoreApp.Library.Models.Order SearchedAndFoundOrder(string firstName, string lastName)
-    {
-      //      _orderRepository.SearchForFirst(firstName, lastName);
+    // [HttpGet("api/searchOrder")]
+    // public StoreApp.Library.Models.Order SearchedAndFoundOrder(string firstName, string lastName)
+    // {
+    //        _orderRepository.SearchForFirst(firstName, lastName);
 
-      return new Library.Models.Order();
-    }
-
-
-
+    //   return new Library.Models.Order();
+    // }
 
   }
 }
