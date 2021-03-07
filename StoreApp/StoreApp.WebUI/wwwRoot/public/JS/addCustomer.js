@@ -8,7 +8,7 @@ const lastName = document.getElementById("lastName");
 
 actionButton.addEventListener('click', function(){
   //debugger;
-  if (firstName.value === '' && lastName.value === '')
+  if (firstName.value === '' || lastName.value === '')
   {
     HeyYouGuys("Form must be completly filled");
     return;

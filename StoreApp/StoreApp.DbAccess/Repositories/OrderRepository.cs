@@ -79,22 +79,7 @@ namespace StoreApp.DbAccess.Repositories
       .Include(o => o.Location)
       .Include(o => o.Orderitems)
         .ThenInclude(oi => oi.Product)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Quantity)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Id)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
-      //   .ThenInclude(p => p.Name)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
-      //   .ThenInclude(p => p.Price)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Quantity)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
       .Where(o => o.CustomerId == customerId);
-      // .GroupBy(o => o.CustomerId);
 
 
       var itemsInCustomerOrder = new HashSet<StoreApp.Library.Models.Orderline>();
@@ -109,7 +94,6 @@ namespace StoreApp.DbAccess.Repositories
             OrderId = (int)orderline.OrderId,
             ProductId = (int)orderline.ProductId,
             Quantity = orderline.Quantity
-
           });
         }
         customerOrderHistory.Add(new StoreApp.Library.Models.Order
@@ -131,32 +115,17 @@ namespace StoreApp.DbAccess.Repositories
     {
       var locationOrderHistory = new List<StoreApp.Library.Models.Order>();
 
-      var ordersByCustomer = _orders.Orders
+      var ordersByLocation = _orders.Orders
       .Include(o => o.Customer)
       .Include(o => o.Location)
       .Include(o => o.Orderitems)
         .ThenInclude(oi => oi.Product)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Quantity)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Id)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
-      //   .ThenInclude(p => p.Name)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
-      //   .ThenInclude(p => p.Price)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Quantity)
-      // .Include(o => o.Orderitems)
-      //   .ThenInclude(oi => oi.Product)
       .Where(o => o.LocationId == locationId);
-      // .GroupBy(o => o.CustomerId);
 
 
       var itemsInLocationOrder = new HashSet<StoreApp.Library.Models.Orderline>();
 
-      foreach (var order in ordersByCustomer)
+      foreach (var order in ordersByLocation)
       {
         foreach (var orderline in order.Orderitems)
         {

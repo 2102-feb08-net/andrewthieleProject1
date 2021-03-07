@@ -86,7 +86,7 @@ function sendCustomer(firstName, lastName) {
    {
     if (!response.ok) {
       const RESULTS_AREA = document.getElementById("searchResultsArea");
-      RESULTS_AREA.innerHTML = `<h3> Customer NOT found`;
+      RESULTS_AREA.innerHTML = `<h3> Customer NOT found</h3>`;
 
       throw new Error(`Network response was not ok (${response.status})`);
 

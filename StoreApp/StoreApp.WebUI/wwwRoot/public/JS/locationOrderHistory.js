@@ -1,11 +1,9 @@
 'use strict';
+const anchor = document.getElementById("LocationList");
 
-const anchor = document.getElementById('customerList');
-
-
+const GET_LOCATION_HISTORY_DATA = document.getElementById("actionBtn");
 
 LoadLocationList().then(locations => {
-  debugger;
   for (const location of locations) {
     anchor.appendChild(new Option(`${location.code} `,`${location.id}`));
   }

@@ -41,9 +41,9 @@ namespace StoreApp.WebUI.Controllers
     }
 
     [HttpGet("api/order/location/{id}")]
-    public Library.Models.Order GetOrdersByLocationId(int id)
+    public List<Library.Models.Order> GetOrdersByLocationId(int id)
     {
-      return new Library.Models.Order();
+      return _orderRepository.GetOrdersByLocationId(id);
     }
 
     [HttpPost("api/addOrder")]
