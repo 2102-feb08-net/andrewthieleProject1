@@ -62,5 +62,5 @@ steps:
     ConnectionType: 'AzureRM'
     azureSubscription: 'Azure subscription 1(efb7f73b-626f-4d34-ba28-ea6f68edcbc9)'
     appType: 'webApp'
-    WebAppName: '2102andrewthiele-storeproj1'
+    WebAppName: 'atothet'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
