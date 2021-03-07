@@ -42,7 +42,6 @@ function DisplayCustomerOrders(whichCustomerID) {
       INFO_BOARD.innerHTML = `THIS CUSTOMER HAS NO ORDERS`;
       return;
     } else {
-      debugger;
       INFO_BOARD.innerHTML = ``;
 
       orderhistory.forEach(element => {
