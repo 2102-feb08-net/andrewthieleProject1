@@ -22,8 +22,8 @@ namespace StoreApp.WebUI.Controllers
     }
 
     [HttpGet("api/orders")]
-    public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
-    // public IEnumerable<StoreApp.DbAccess.Entities.Order> GetOrders()
+    public List<StoreApp.Library.Models.Order> GetOrders()
+
     {
       return _orderRepository.GetOrders();
     }

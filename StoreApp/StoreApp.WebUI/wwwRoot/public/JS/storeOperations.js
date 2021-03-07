@@ -52,27 +52,36 @@ function LoadProductList() {
 
 
 function LoadOrderList() {
-  const orders =  [
-    {
-      ID: '1',
-      Customer: 'Bob Smith',
-      Location: 'X'
-    },    
-    {
-      ID: '2',
-      Customer: 'Bob Smith',
-      Location: 'Y'
-    },    
-    {
-      ID: '3',
-      Customer: 'Bob Smith',
-      Location: 'Z'    },    
-  ];
+  // const orders =  [
+  //   {
+  //     ID: '1',
+  //     Customer: 'Bob Smith',
+  //     Location: 'X'
+  //   },    
+  //   {
+  //     ID: '2',
+  //     Customer: 'Bob Smith',
+  //     Location: 'Y'
+  //   },    
+  //   {
+  //     ID: '3',
+  //     Customer: 'Bob Smith',
+  //     Location: 'Z'    },    
+  // ];
 
-  const anchor = document.getElementById('orderList');
-  for(const order of orders) {
-    anchor.appendChild(new Option(`${order.Customer} - ${order.ID}`,`${order.ID}`));
-  }
+  // const anchor = document.getElementById('orderList');
+  // for(const order of orders) {
+  //   anchor.appendChild(new Option(`${order.Customer} - ${order.ID}`,`${order.ID}`));
+  // }
+  return fetch(`/api/orders`).then(response => {
+    if(!response.ok) {
+
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+    return response.json();
+  });
+
+
 }
 
 
@@ -86,7 +95,7 @@ function sendCustomer(firstName, lastName) {
    {
     if (!response.ok) {
       const RESULTS_AREA = document.getElementById("searchResultsArea");
-      RESULTS_AREA.innerHTML = `<h3> Customer NOT found</h3>`;
+      RESULTS_AREA.innerHTML = `Network response was not ok`;
 
       throw new Error(`Network response was not ok (${response.status})`);
 

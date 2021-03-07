@@ -12,7 +12,7 @@
   <title>View Order Details</title>
 </head>
 
-<body onload="LoadOrderList()">
+<body>
   <header>
 
   </header>
@@ -23,7 +23,8 @@
           <legend>Select Order</legend>
           <div class="form-group"><select name="order" id="orderList"></select></div>
           <div>
-            <button class="btn btn-link"><a href="../../index.html"></button>Cancel</a>
+            <button class="btn btn-link" type="button"><a href="../../index.html">Cancel</a></button>
+            <button type="button" id="actionButton">Get Details</button>
           </div>
         </fieldset>
       </form>
