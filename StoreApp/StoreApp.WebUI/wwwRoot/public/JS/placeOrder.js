@@ -24,3 +24,15 @@ LoadProductList().then(products => {
     productAnchor.appendChild(new Option(`${product.name}`,`${product.id}`));
   }
 });
+
+const DISPLAY_ORDERED_ITEM_AREA = document.getElementById("orderResults");
+
+function AddOrderItemToOrder() {
+  let productId = document.getElementById("ProductList").value;
+  let customerId = document.getElementById("customerList").value;
+  let LocationId = document.getElementById("LocationList").value;
+
+  HeyYouGuys(productId);
+  HeyYouGuys(customerId);
+  HeyYouGuys(LocationId);
+}

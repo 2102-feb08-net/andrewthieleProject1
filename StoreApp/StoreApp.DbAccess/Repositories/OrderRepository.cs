@@ -19,44 +19,62 @@ namespace StoreApp.DbAccess.Repositories
       _orders = orders;
     }
 
-    public IEnumerable<StoreApp.Library.Models.Order> GetOrders()
-    // public IEnumerable<StoreApp.DbAccess.Entities.Order> GetOrders()
+    public List<StoreApp.Library.Models.Order> GetOrders()
     {
-      var query = _orders.Orders;
+      var orders = new List<StoreApp.Library.Models.Order>();
 
-      var orderlines = _orders.Orderitems;
+      var orderquery = _orders.Orders
+      .Include(o => o.Customer)
+      .Include(o => o.Location)
+      .Include(o => o.Orderitems)
+        .ThenInclude(oi => oi.Product)
+      .ToList();
 
-      if (orderlines != null)
+      foreach (var order in orderquery)
       {
-        var orderline = new Orderline();
-      }
-
-      if (query != null)
-      {
-        HashSet<Orderline> itemsInOrder = new HashSet<Orderline>();
-        return query.Select(o => new StoreApp.Library.Models.Order
+        var itemsOrdered = new HashSet<Orderline>();
+        foreach (var orderedItem in order.Orderitems)
         {
-          Id = o.Id,
-          CustomerId = (int)o.CustomerId,
-          LocationId = (int)o.LocationId
 
+          itemsOrdered.Add(new Library.Models.Orderline
+          {
+            Id = orderedItem.Id,
+            OrderId = (int)orderedItem.OrderId,
+            ProductId = (int)orderedItem.ProductId,
+            Quantity = orderedItem.Quantity
+          });
+        }
+        orders.Add(new Library.Models.Order
+        {
+          Id = order.Id,
+          CustomerId = (int)order.CustomerId,
+          TimeOfOrder = order.TimeOfOrder,
+          LocationId = (int)order.LocationId,
+          OrderItems = itemsOrdered
+        });
+      }
 
-        }).ToList();
-      }
-      else
-      {
-        return new List<StoreApp.Library.Models.Order>();
-      }
+      return orders;
+
     }
 
     public StoreApp.Library.Models.Order GetOrderById(int id)
     {
-      var query = _orders.Orders.Find(id);
-      var items = _orders.Orderitems.Select(i => i.OrderId == id);
+      var order = new StoreApp.Library.Models.Order();
+      var query = _orders.Orders
+      .Find(id);
+      var items = _orders.Orderitems.Where(oi => oi.OrderId == id).ToList();
       var allItemsInOrder = new HashSet<Orderline>();
       foreach (var item in items)
       {
-        var orderedItem = new Orderline();
+        allItemsInOrder.Add(new Orderline
+        {
+          Id = item.Id,
+          OrderId = (int)item.OrderId,
+          Quantity = item.Quantity,
+          ProductId = (int)item.ProductId
+
+        });
       }
 
       return new Library.Models.Order

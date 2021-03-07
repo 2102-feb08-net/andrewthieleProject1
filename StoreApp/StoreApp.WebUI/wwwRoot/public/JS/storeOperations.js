@@ -95,7 +95,7 @@ function sendCustomer(firstName, lastName) {
    {
     if (!response.ok) {
       const RESULTS_AREA = document.getElementById("searchResultsArea");
-      RESULTS_AREA.innerHTML = `Network response was not ok`;
+      RESULTS_AREA.innerHTML = `Customber not found`;
 
       throw new Error(`Network response was not ok (${response.status})`);
 
@@ -105,7 +105,10 @@ return response.json()})
   .then(customer => {
     if (customer === null)
     {
-      
+      const RESULTS_AREA = document.getElementById("searchResultsArea");
+      RESULTS_AREA.innerHTML = ``;
+      RESULTS_AREA.innerHTML = `Customer not found`
+
     }
     else {
       const RESULTS_AREA = document.getElementById("searchResultsArea");

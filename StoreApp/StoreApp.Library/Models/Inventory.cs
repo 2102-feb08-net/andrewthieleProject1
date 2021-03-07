@@ -11,6 +11,8 @@ namespace StoreApp.Library.Models
     private int _productId;
     private int _quantity;
 
+    public Inventory() { }
+
     public Inventory(int id, int storeId, int productId, int quantity)
     {
       Id = id;

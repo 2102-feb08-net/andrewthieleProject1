@@ -32,7 +32,7 @@ function DisplayCustomerOrders(whichCustomerID) {
   INFO_BOARD.innerHTML = ``;
   return fetch(`/api/order/customer/${whichCustomerID}`).then(response => {
     if(!response.ok) {
-      INFO_BOARD.innerHTML = `<h3> Order NOT FOUND </h3>`;
+      INFO_BOARD.innerHTML = `<h3> Network response was not ok </h3>`;
       throw new Error(`Network response was not ok (${response.status})`);
     }
     return response.json();
