@@ -17,8 +17,7 @@ actionButton.addEventListener('click', function(){
 });
 
 
-function NewCustomer(e) {
-  //e.preventDefault();
+function NewCustomer() {
 
   const newCustomer =
   {
