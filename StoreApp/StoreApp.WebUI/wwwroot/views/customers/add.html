@@ -22,19 +22,19 @@
         <fieldset>
           <legend>Add Customer</legend>
           <div class="form-group">
-            <label for="">First Name<input type="text" name="firstName" id="firstName" placeholder="Bob"
-                required></label>
-            <label for="">Last Name<input type="text" name="lastName" id="lastName" placeholder="Smith"
-                required></label>
+            <label for="">First Name<input type="text" name="firstName" id="firstName" placeholder="Bob" required
+                onclick="RemoveThankYou()"></label>
+            <label for="">Last Name<input type="text" name="lastName" id="lastName" placeholder="Smith" required
+                onclick="RemoveThankYou()""></label>
           </div>
           <div>
-            <button class="btn btn-link"><a class="btn btn-link" href="../../index.html">Cancel</a></button>
-            <button id="actionBtn" type="button">Add</button>
+            <button class=" btn btn-link"><a class="btn btn-link" href="../../index.html">Cancel</a></button>
+              <button id="actionBtn" type="button">Add</button>
           </div>
         </fieldset>
       </form>
     </div>
-    <div id="results" class="container"></div>
+    <div id="results" class="container" hidden>Customer Added</div>
   </main>
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
     integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

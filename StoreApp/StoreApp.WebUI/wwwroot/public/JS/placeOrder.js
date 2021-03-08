@@ -8,10 +8,10 @@ let OrderedItems = [];
 
 let Order =  {
     "customerId": undefined,
-    "timeOfOrder": undefined,
     "orderItems": [],
     "locationId": undefined
   }
+
 
 let hasAnOrder = false;
 
@@ -109,7 +109,9 @@ function SubmitOrder() {
   // sumbit order
   // Order["timeOfOrder"] = undefined;
 
-  return fetch(`api/addOrder`,{
+  console.log(Order);
+
+  return fetch(`/api/addOrder`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
@@ -124,15 +126,21 @@ function SubmitOrder() {
        // clear Order object
         Order =  {
           "customerId": undefined,
-          "timeOfOrder": undefined,
           "orderItems": [],
           "locationId": undefined
         }
       // clear display area
-      DISPLAY_ORDERED_ITEM_AREA.innerHTML = `Order Succesfully Sent`;
+      document.getElementById("addOrderedItemsHere").innerHTML = ``;
+      DISPLAY_ORDERED_ITEM_AREA.hidden = true;
+      document.getElementById("orderAccepted").hidden = false;
+
     }
   });
   
+}
+
+function RemoveThankYou() {
+  document.getElementById("orderAccepted").hidden = true;
 }
 
 function sendMessage(message) {

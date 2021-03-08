@@ -34,17 +34,20 @@ namespace StoreApp.WebUI.Controllers
       return _orderRepository.GetOrderById(id);
     }
 
+
     [HttpGet("api/order/customer/{id}")]
     public List<StoreApp.Library.Models.Order> GetOrdersByCustomerId(int id)
     {
       return _orderRepository.GetOrdersByCustomerId(id);
     }
 
+
     [HttpGet("api/order/location/{id}")]
     public List<Library.Models.Order> GetOrdersByLocationId(int id)
     {
       return _orderRepository.GetOrdersByLocationId(id);
     }
+
 
     [HttpPost("api/addOrder")]
     public void AddOrder(StoreApp.Library.Models.Order order)

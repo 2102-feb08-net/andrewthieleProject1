@@ -7,7 +7,7 @@ const firstName = document.getElementById("firstName");
 const lastName = document.getElementById("lastName");
 
 actionButton.addEventListener('click', function(){
-  //debugger;
+  //
   if (firstName.value === '' || lastName.value === '')
   {
     HeyYouGuys("Form must be completly filled");
@@ -31,6 +31,11 @@ function NewCustomer() {
   addCustomer(newCustomer);
 };
 
+function RemoveThankYou() {
+  document.getElementById("results").hidden = true;
+
+}
+
 function addCustomer(customer) {
   return fetch('/api/addCustomer', {
       method: 'POST',
@@ -42,6 +47,8 @@ function addCustomer(customer) {
       .then(response => {
       if (!response.ok) {
           throw new Error(`Network response was not ok (${response.status})`);
+      } else{
+        document.getElementById("results").hidden = false;
       }
       return response.json();
   });

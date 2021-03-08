@@ -36,7 +36,7 @@ function DisplayOrderDetails(orderID) {
       return;
     } else {
       TABLE_AREA.innerHTML = ``;
-      debugger;
+      
       // TABLE_AREA.innerHTML = `${orderInfo}`;
       TABLE_AREA.innerHTML = `<p id="addOrderLinesHere">Customer ID: ${orderInfo.customerId} Location ID: ${orderInfo.locationId} Order Time: ${orderInfo.timeOfOrder.substring(0, 10)}</p>`;
       if(orderInfo.orderItems.length === 0) {

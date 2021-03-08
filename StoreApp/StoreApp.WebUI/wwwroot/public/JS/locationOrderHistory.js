@@ -47,7 +47,7 @@ function DisplayLocationOrders(whichLocationId) {
 
         }
         let row = document.createElement("p");
-        row.innerHTML = `Order ID: ${element.id} Location ID: ${element.locationId}`;
+        row.innerHTML = `Order ID: ${element.id} Cusstomer ID: ${element.customerId}`;
         DISPLAY_AREA.appendChild(row);
         element.orderItems.forEach(orderedItem => {
           let orderedItemRow = document.createElement("p");
