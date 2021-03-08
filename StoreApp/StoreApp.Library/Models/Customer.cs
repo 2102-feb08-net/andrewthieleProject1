@@ -35,29 +35,73 @@ namespace StoreApp.Library.Models
     public int Id
     {
       get => _id;
-      set => _id = value;
+      set
+      {
+        if (CustomerHasOkayId(value) == true)
+        {
+          _id = value;
+        }
+
+      }
     }
     public string FirstName
     {
       get => _firstName;
-      set => _firstName = value;
+      set
+      {
+        if (IsFirstNameOkay(value) == true)
+        {
+          _firstName = value;
+        }
+        else
+        {
+          _firstName = "DEFAULT";
+        }
+
+      }
     }
 
     public string LastName
     {
       get => _lastName;
-      set => _lastName = value;
+      set
+      {
+        if (IsFirstNameOkay(value) == true)
+        {
+          _lastName = value;
+        }
+        else
+        {
+          _lastName = "DEFAULT";
+        }
+
+      }
     }
     public decimal Balance
     {
       get => _balance;
-      set => _balance = value;
+      set
+      {
+        if (value < 0)
+        {
+          _balance = 0;
+        }
+        else
+        {
+          _balance = value;
+        }
+
+      }
     }
-    public bool IsFirstNameOkay()
+    /// <summary>
+    /// Check for valid first name
+    /// </summary>
+    /// <returns></returns>
+    public bool IsFirstNameOkay(string name)
     {
       string forbbidenChars = "!@#$%^&*()";
 
-      foreach (char i in _firstName)
+      foreach (char i in name)
       {
         foreach (char j in forbbidenChars)
         {
@@ -70,11 +114,15 @@ namespace StoreApp.Library.Models
 
       return true;
     }
-    public bool IsLastNameOkay()
+    /// <summary>
+    /// check for valid last name
+    /// </summary>
+    /// <returns></returns>
+    public bool IsLastNameOkay(string name)
     {
       string forbbidenChars = "!@#$%^&*()";
 
-      foreach (char i in _lastName)
+      foreach (char i in name)
       {
         foreach (char j in forbbidenChars)
         {
@@ -86,5 +134,28 @@ namespace StoreApp.Library.Models
       }
       return true;
     }
+    /// <summary>
+    /// Check if customer owes money
+    /// </summary>
+    /// <returns></returns>
+
+    public bool CustomerHasPositiveBalance()
+    {
+      return _balance > 0;
+    }
+    /// <summary>
+    /// check is customer needs a refund
+    /// </summary>
+    /// <returns></returns>
+    public bool CustomerHasNegativeBalance()
+    {
+      return _balance < 0;
+    }
+
+    public bool CustomerHasOkayId(int value)
+    {
+      return value > 0;
+    }
+
   }
 }

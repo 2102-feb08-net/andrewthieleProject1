@@ -61,7 +61,34 @@ namespace StoreApp.Library.Models
       get => _state;
       set => _state = value;
     }
+    /// <summary>
+    /// Checks if locacaton has a valid code
+    /// </summary>
+    /// <returns>bool</returns>
+    public bool LocationHasValidCode(string code)
+    {
+      string forbbidenChars = "!@#$%^&*()";
 
+      foreach (char i in code)
+      {
+        foreach (char j in forbbidenChars)
+        {
+          if (i == j)
+          {
+            return false;
+          }
+        }
+      }
+      return true;
+    }
+    /// <summary>
+    /// Checks if Location object holds a valid id from the database
+    /// </summary>
+    /// <returns></returns>
+    public bool LocationHasValidId()
+    {
+      return _id > 0;
+    }
   }
 }
 

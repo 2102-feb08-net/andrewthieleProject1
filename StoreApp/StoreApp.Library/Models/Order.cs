@@ -7,12 +7,21 @@ namespace StoreApp.Library.Models
   {
     private int _id;
     private int _customerId;
+    private Customer _customer;
     private DateTimeOffset _timeOfOrder;
     private int _locationId;
+    private Location _location;
 
     private HashSet<Orderline> _ordereditems;
 
     public Order() { }
+    public Order(Customer customer, DateTimeOffset timeOfOrder, Location location, HashSet<Orderline> orderedItems)
+    {
+      Customer = customer;
+      TimeOfOrder = timeOfOrder;
+      Location = location;
+      OrderItems = orderedItems;
+    }
     public Order(int customerId, DateTimeOffset timeOfOrder, int locationId)
     {
       _customerId = customerId;
@@ -53,6 +62,12 @@ namespace StoreApp.Library.Models
       set => _customerId = value;
     }
 
+    public Customer Customer
+    {
+      get => _customer;
+      set => _customer = value;
+    }
+
     public DateTimeOffset TimeOfOrder
     {
       get => _timeOfOrder;
@@ -70,9 +85,50 @@ namespace StoreApp.Library.Models
       set => _locationId = value;
     }
 
+    public Location Location
+    {
+      get => _location;
+      set => _location = value;
+    }
+    /// <summary>
+    /// Adds an ordered item to the order
+    /// </summary>
+    /// <param name="orderedItem"></param>
     public void AddOrderItem(Orderline orderedItem)
     {
       _ordereditems.Add(orderedItem);
+    }
+    /// <summary>
+    /// Checks if Order object holds a valid customerId from database
+    /// </summary>
+    /// <returns></returns>
+    public bool HasValidCustomerId()
+    {
+      return _customerId > 0;
+    }
+    /// <summary>
+    /// Checks if Ordr Object holds a valid LocadionId from database
+    /// </summary>
+    /// <returns></returns>
+    public bool HasValidLocationId()
+    {
+      return _locationId > 0;
+    }
+    /// <summary>
+    /// Returns number of items in an order
+    /// </summary>
+    /// <returns></returns>
+    public bool OrderHasItems()
+    {
+      return _ordereditems.Count > 0;
+    }
+    /// <summary>
+    /// Checks if Order Object holds valid id from database
+    /// </summary>
+    /// <returns></returns>
+    public bool HasValidOrderId()
+    {
+      return _id > 0;
     }
 
   }

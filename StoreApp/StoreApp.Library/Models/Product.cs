@@ -22,10 +22,9 @@ namespace StoreApp.Library.Models
     }
     public Product(string name, string description, decimal price)
     {
-      _name = name;
-      _description = description;
-      _price = price;
-
+      Name = name;
+      Description = description;
+      Price = price;
     }
 
     public int Id
@@ -37,7 +36,17 @@ namespace StoreApp.Library.Models
     public string Name
     {
       get => _name;
-      set => _name = value;
+      set
+      {
+        if (ProductNameIsValid(value) == true)
+        {
+          _name = value;
+        }
+        else
+        {
+          _name = "PRODUCT NOT NAMED";
+        }
+      }
     }
 
     public string Description
@@ -49,7 +58,61 @@ namespace StoreApp.Library.Models
     public decimal Price
     {
       get => _price;
-      set => _price = value;
+      set
+      {
+        if (value >= 0)
+        {
+          _price = value;
+        }
+        else
+        {
+          _price = 0;
+        }
+      }
+    }
+    /// <summary>
+    /// Check for error in price entry
+    /// </summary>
+    /// <returns></returns>
+    public bool PriceIsNotNegative()
+    {
+      return _price >= 0M;
+    }
+    /// <summary>
+    /// Check if price is greater than zero
+    /// </summary>
+    /// <returns></returns>
+    public bool PriceIsGreaterThanZero()
+    {
+      return _price > 0M;
+    }
+    /// <summary>
+    /// CHeck for empty descriptions
+    /// </summary>
+    /// <returns></returns>
+    public bool DescriptionIsEmpty()
+    {
+      return _description.Length == 0;
+    }
+    /// <summary>
+    /// Check for valid product name
+    /// </summary>
+    /// <returns></returns>
+    public bool ProductNameIsValid(string productName)
+    {
+      string forbbidenChars = "!@#$%^&*()";
+
+      foreach (char i in productName)
+      {
+        foreach (char j in forbbidenChars)
+        {
+          if (i == j)
+          {
+            return false;
+          }
+        }
+      }
+      return true;
     }
   }
 }

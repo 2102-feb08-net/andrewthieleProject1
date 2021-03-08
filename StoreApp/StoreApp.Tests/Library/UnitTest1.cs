@@ -13,7 +13,7 @@ namespace StoreApp.Tests
       var customer = new Customer(0, "Bob", "Smith", 100.00M);
 
       // act
-      bool isNameOkay = customer.IsFirstNameOkay();
+      bool isNameOkay = customer.IsFirstNameOkay("Bob");
       // assert
       Assert.True(isNameOkay);
     }
@@ -28,7 +28,7 @@ namespace StoreApp.Tests
       var customer = new Customer(0, "B@b", "Smith", 100.00M);
 
       // act
-      bool isNameOkay = customer.IsFirstNameOkay();
+      bool isNameOkay = customer.IsFirstNameOkay("B@b");
       // assert
       Assert.False(isNameOkay);
     }
@@ -42,7 +42,7 @@ namespace StoreApp.Tests
       var customer = new Customer(0, "Bob", "Smith", 100.00M);
 
       // act
-      bool isNameOkay = customer.IsLastNameOkay();
+      bool isNameOkay = customer.IsLastNameOkay("Smith");
       // assert
       Assert.True(isNameOkay);
     }
@@ -57,7 +57,7 @@ namespace StoreApp.Tests
       var customer = new Customer(0, "Bob", "Sm!th", 100.00M);
 
       // act
-      bool isNameOkay = customer.IsLastNameOkay();
+      bool isNameOkay = customer.IsLastNameOkay("Sm!th");
       // assert
       Assert.False(isNameOkay);
     }
