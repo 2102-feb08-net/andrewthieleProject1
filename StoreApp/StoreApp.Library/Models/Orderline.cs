@@ -7,9 +7,9 @@ namespace StoreApp.Library.Models
     private int _id;
     private int _orderId;
 
-    private Order _order;
+    public Order _order;
     private int _productId;
-    private Product _product;
+    public Product _product;
 
     private int _quantity;
 

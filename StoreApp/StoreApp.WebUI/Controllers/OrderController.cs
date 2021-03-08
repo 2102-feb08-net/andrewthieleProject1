@@ -49,7 +49,7 @@ namespace StoreApp.WebUI.Controllers
     [HttpPost("api/addOrder")]
     public void AddOrder(StoreApp.Library.Models.Order order)
     {
-      // _orderRepository.AddOrder(order);
+      _orderRepository.AddOrder(order);
       _orderRepository.Save();
     }
   }

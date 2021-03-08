@@ -177,25 +177,19 @@ namespace StoreApp.DbAccess.Repositories
       var orderItems = new HashSet<StoreApp.DbAccess.Entities.Orderitem>();
       foreach (var orderLine in order.OrderItems)
       {
-        orderItems.Add(new Orderitem
+        orderItems.Add(new StoreApp.DbAccess.Entities.Orderitem
         {
-          Id = orderLine.Id,
-          OrderId = orderLine.OrderId,
           ProductId = orderLine.ProductId,
           Quantity = orderLine.Quantity
         });
       }
-
-
       _orders.Orders.Add(new StoreApp.DbAccess.Entities.Order
       {
-        Id = (int)order.Id,
         CustomerId = order.CustomerId,
         TimeOfOrder = DateTimeOffset.Now,
-        Orderitems = orderItems
-
+        Orderitems = orderItems,
+        LocationId = order.LocationId
       });
-      _orders.SaveChanges();
     }
 
     public void Save()

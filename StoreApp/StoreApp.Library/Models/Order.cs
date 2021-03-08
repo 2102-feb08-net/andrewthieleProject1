@@ -7,12 +7,12 @@ namespace StoreApp.Library.Models
   {
     private int _id;
     private int _customerId;
-    private Customer _customer;
-    private DateTimeOffset _timeOfOrder;
+    public Customer _customer;
+    public DateTimeOffset _timeOfOrder;
     private int _locationId;
-    private Location _location;
+    public Location _location;
 
-    private HashSet<Orderline> _ordereditems;
+    public HashSet<Orderline> _ordereditems;
 
     public Order() { }
     public Order(Customer customer, DateTimeOffset timeOfOrder, Location location, HashSet<Orderline> orderedItems)
