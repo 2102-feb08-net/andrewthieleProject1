@@ -16,7 +16,7 @@ variables:
 steps:
 - task: SonarCloudPrepare@1
   inputs:
-    SonarCloud: 'proj14reelz'
+    SonarCloud: 'proj1'
     organization: '2102-feb08-net'
     scannerMode: 'MSBuild'
     projectKey: '2102-feb08-net_andrewthieleProject1'
