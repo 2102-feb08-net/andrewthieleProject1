@@ -12,6 +12,10 @@ let Order =  {
     "locationId": undefined
   }
 
+let ORDERTOTAL = 0;
+
+let PRODUCTS = [];
+
 
 let hasAnOrder = false;
 
@@ -31,9 +35,15 @@ LoadLocationList().then(locations => {
 const productAnchor = document.getElementById('ProductList');
 
 LoadProductList().then(products => {
-  
+  // debugger;
   for(const product of products) {
-    productAnchor.appendChild(new Option(`${product.name}`,`${product.id}`));
+    productAnchor.appendChild(new Option(`${product.name} : ${product.price}`,`${product.id}`));
+    PRODUCTS.push({
+      "id": Number(product.id),
+      "name": product.name,
+      "description": product.description,
+      "price": Number(product.price)
+    });
   }
 });
 
@@ -43,6 +53,8 @@ const ADD_TO_ORDER_BUTTON = document.getElementById("actionBtn");
 
 ADD_TO_ORDER_BUTTON.addEventListener("click", AddOrderItemToOrder);
 
+
+// Addes an order item to an order
 function AddOrderItemToOrder() {
   let productId = document.getElementById("ProductList").value;
   let customerId = document.getElementById("customerList").value;
@@ -53,6 +65,7 @@ function AddOrderItemToOrder() {
     HeyYouGuys('Unacceptable quantity');
     return; 
   }
+
 // who says == isn't useful
   if(quantity == false) {
     HeyYouGuys('Order an item please');
@@ -69,6 +82,10 @@ function AddOrderItemToOrder() {
     "productId": Number(productId),
     "quantity": Number(quantity)
   }
+
+  // adjust order total
+  debugger;
+  ORDERTOTAL += Number(quantity) * Number(PRODUCTS[currentItemOrdered["productId"]].price);
   // test to see what is in order
   Order.orderItems.push(currentItemOrdered);
 
@@ -93,21 +110,9 @@ function AddOrderItemToOrder() {
 
 }
 
-// {
-//   "customerId": 0,
-//   "timeOfOrder": "2021-03-08T02:52:58.207Z",
-//   "orderItems": [
-//     {
-//       "productId": 0,
-//       "quantity": 0
-//     }
-//   ],
-//   "locationId": 0,
-// }
-
+/// submitts order
 function SubmitOrder() {
   // sumbit order
-  // Order["timeOfOrder"] = undefined;
 
   console.log(Order);
 
@@ -123,6 +128,14 @@ function SubmitOrder() {
     if (!response.ok) {
       throw new Error(`Network response was not ok (${response.status})`);
     } else {
+      UpdateCustomerBalance(Number(Order["customerId"]),ORDERTOTAL);
+      Order.orderItems.forEach(productOrdered => {
+        debugger;
+        UpdateProductQuantityInStoreWith(
+          Number(document.getElementById("LocationList").value),
+          Number(productOrdered["productId"]),
+          Number(productOrdered["quantity"]));
+      });
        // clear Order object
         Order =  {
           "customerId": undefined,
@@ -133,14 +146,32 @@ function SubmitOrder() {
       document.getElementById("addOrderedItemsHere").innerHTML = ``;
       DISPLAY_ORDERED_ITEM_AREA.hidden = true;
       document.getElementById("orderAccepted").hidden = false;
-
+      
     }
   });
-  
 }
 
+/// Removes thank you 
 function RemoveThankYou() {
   document.getElementById("orderAccepted").hidden = true;
+}
+
+/// Updates Customer balance
+function UpdateCustomerBalance(id, balance) {
+  return fetch(`/api/update/customer/balance/${id}/${balance}`).then(response => {
+    if(!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+  });
+}
+
+/// Updates inventory in the store
+function UpdateProductQuantityInStoreWith(storeId, productId, quantity) {
+  return fetch(`/api/adjust/inventory/${storeId}/${productId}/${quantity}`).then(response => {
+    if(!response.ok) {
+      throw new Error(`Network response was not ok (${response.status})`);
+    }
+  });
 }
 
 function sendMessage(message) {

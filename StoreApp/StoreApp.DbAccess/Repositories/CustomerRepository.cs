@@ -104,6 +104,16 @@ namespace StoreApp.DbAccess.Repositories
       });
     }
     /// <summary>
+    /// Updates Customer Balance
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="ammound"></param>
+    public void UpdateCustomerBalance(int id, decimal ammound)
+    {
+      var customerBalance = _customers.Customers.Find(id);
+      customerBalance.Balance += ammound;
+    }
+    /// <summary>
     /// Saves ammendments to database
     /// </summary>
     public void Save()

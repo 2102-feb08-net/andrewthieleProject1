@@ -18,26 +18,30 @@ namespace StoreApp.DbAccess.Repositories
     {
       _inventories = inventories;
     }
-
-    public IEnumerable<StoreApp.Library.Models.Inventory> GetInventories()
+    /// <summary>
+    /// returns all inventories
+    /// </summary>
+    /// <returns></returns>
+    public List<StoreApp.Library.Models.Inventory> GetInventories()
     {
       var query = _inventories.Inventories;
-      if (query != null)
-      {
-        return query.Select(i => new StoreApp.Library.Models.Inventory
-        {
-          Id = i.Id,
-          StoreId = (int)i.LocationId,
-          ProductId = (int)i.ProductId,
-          Quantity = i.InStock
-        }).ToList();
-      }
-      else
-      {
-        return new List<StoreApp.Library.Models.Inventory>();
-      }
-    }
 
+      return query
+      .Include(i => i.Product)
+      .Include(i => i.Location)
+      .Select(i => new StoreApp.Library.Models.Inventory
+      {
+        StoreId = (int)i.LocationId,
+        ProductId = (int)i.ProductId,
+        Quantity = i.InStock
+      }).ToList();
+
+    }
+    /// <summary>
+    /// Gets an inventory by it's id
+    /// </summary>
+    /// <param name="id"></param>
+    /// <returns></returns>
     public StoreApp.Library.Models.Inventory GetInventoryById(int id)
     {
       var inventory = _inventories.Inventories.Find(id);
@@ -56,11 +60,16 @@ namespace StoreApp.DbAccess.Repositories
         throw new Exception("Inventory does not exist");
       }
     }
-
+    /// <summary>
+    /// Gets Inventory of store with respect to it's product
+    /// </summary>
+    /// <param name="storeId"></param>
+    /// <param name="productId"></param>
+    /// <returns></returns>
     public StoreApp.Library.Models.Inventory GetInventoryByStoreIdAndByProductId(int storeId, int productId)
     {
 
-      var inventory = _inventories.Inventories.Where(i => i.LocationId == storeId && i.ProductId == productId).First();
+      var inventory = _inventories.Inventories.Single(i => i.LocationId == storeId && i.ProductId == productId);
 
       if (inventory != null)
       {
@@ -77,20 +86,20 @@ namespace StoreApp.DbAccess.Repositories
         throw new Exception("Inventory does not exist");
       }
     }
-
-    public StoreApp.Library.Models.Inventory AdjustInventory(int storeId, int productId, int quantity)
+    /// <summary>
+    /// Adjusts Inventory to a store
+    /// </summary>
+    /// <param name="storeId"></param>
+    /// <param name="productId"></param>
+    /// <param name="quantity"></param>
+    /// <returns></returns>
+    public void AdjustInventory(int storeId, int productId, int quantity)
     {
-      var inventory = _inventories.Inventories.Where(i => i.LocationId == storeId && i.ProductId == productId).First();
+      var inventory = _inventories.Inventories.Single(i => i.LocationId == storeId && i.ProductId == productId);
 
       if (inventory != null)
       {
-        return new StoreApp.Library.Models.Inventory
-        {
-          Id = inventory.Id,
-          StoreId = (int)inventory.LocationId,
-          ProductId = (int)inventory.ProductId,
-          Quantity = quantity <= inventory.InStock ? inventory.InStock - quantity : inventory.InStock
-        };
+        inventory.InStock = quantity <= inventory.InStock ? inventory.InStock - quantity : inventory.InStock;
       }
       else
       {
@@ -98,7 +107,9 @@ namespace StoreApp.DbAccess.Repositories
       }
     }
 
-
+    /// <summary>
+    /// Saves changes to repo
+    /// </summary>
 
     public void Save()
     {

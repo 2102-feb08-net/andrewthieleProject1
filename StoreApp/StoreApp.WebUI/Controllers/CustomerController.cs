@@ -41,5 +41,12 @@ namespace StoreApp.WebUI.Controllers
     {
       return _customerRepository.SearchForFirst(firstName, lastName);
     }
+
+    [HttpGet("api/update/customer/balance/{id}/{ammound}")]
+    public void UpdateCustomerBalance(int id, decimal ammound)
+    {
+      _customerRepository.UpdateCustomerBalance(id, ammound);
+      _customerRepository.Save();
+    }
   }
 }

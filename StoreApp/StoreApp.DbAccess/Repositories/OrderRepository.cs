@@ -99,11 +99,10 @@ namespace StoreApp.DbAccess.Repositories
         .ThenInclude(oi => oi.Product)
       .Where(o => o.CustomerId == customerId);
 
-
-      var itemsInCustomerOrder = new HashSet<StoreApp.Library.Models.Orderline>();
-
       foreach (var order in ordersByCustomer)
       {
+        var itemsInCustomerOrder = new HashSet<StoreApp.Library.Models.Orderline>();
+
         foreach (var orderline in order.Orderitems)
         {
           itemsInCustomerOrder.Add(new StoreApp.Library.Models.Orderline
@@ -140,11 +139,10 @@ namespace StoreApp.DbAccess.Repositories
         .ThenInclude(oi => oi.Product)
       .Where(o => o.LocationId == locationId);
 
-
-      var itemsInLocationOrder = new HashSet<StoreApp.Library.Models.Orderline>();
-
       foreach (var order in ordersByLocation)
       {
+        var itemsInLocationOrder = new HashSet<StoreApp.Library.Models.Orderline>();
+
         foreach (var orderline in order.Orderitems)
         {
           itemsInLocationOrder.Add(new StoreApp.Library.Models.Orderline

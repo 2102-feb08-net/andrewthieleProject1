@@ -10,6 +10,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace StoreApp.DbAccess.Repositories
 {
+  /// <summary>
+  /// Repository for all locations
+  /// </summary>
   public class LocationRepository// : ICustomerRepository
   {
     private readonly StoreProj0Context _locations;
@@ -18,26 +21,28 @@ namespace StoreApp.DbAccess.Repositories
     {
       _locations = locations;
     }
-
+    /// <summary>
+    /// Return all locations
+    /// </summary>
+    /// <returns></returns>
     public IEnumerable<StoreApp.Library.Models.Location> GetLocations()
     {
-      var query = _locations.Locations;
-      if (query != null)
-      {
-        return query.Select(l => new StoreApp.Library.Models.Location
-        {
-          Id = l.Id,
-          Code = l.Code,
-          Address1 = l.Address1,
-          Address2 = l.Address2,
-          City = l.City,
-          State = l.State
-        }).ToList();
-      }
-      else
-      {
-        return new List<StoreApp.Library.Models.Location>();
-      }
+      return _locations.Locations
+    // .Include(l => l.Address1)
+    // .Include(l => l.Address2)
+    // .Include(l => l.City)
+    // .Include(l => l.State)
+    // .Include(l => l.Code)
+    .Select(l => new StoreApp.Library.Models.Location
+    {
+      Id = l.Id,
+      Code = l.Code,
+      Address1 = l.Address1,
+      Address2 = l.Address2,
+      City = l.City,
+      State = l.State
+    }).ToList();
+
     }
 
 

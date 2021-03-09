@@ -24,13 +24,14 @@ namespace StoreApp.WebUI.Controllers
     }
 
     [HttpGet("api/inventories")]
-    public IEnumerable<StoreApp.Library.Models.Inventory> GetInventories()
+    public List<StoreApp.Library.Models.Inventory> GetInventories()
     {
       return _inventoryRepository.GetInventories();
     }
 
-    [HttpPost("api/adjust/inventory")]
-    public void AdjustInventory(int storeId, int productId, int quantity )
+
+    [HttpGet("api/adjust/inventory/{storeId}/{productId}/{quantity}")]
+    public void AdjustInventory(int storeId, int productId, int quantity)
     {
       _inventoryRepository.AdjustInventory(storeId, productId, quantity);
       _inventoryRepository.Save();

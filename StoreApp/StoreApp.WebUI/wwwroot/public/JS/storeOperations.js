@@ -1,19 +1,11 @@
 'use strict';
 
-
-function cancelAction(whatIsCancled) {
-  document.getElementById("formArea").innerHTML = `Canceled ${whatIsCancled}`;
-  document.getElementById("tableArea").innerHTML = "";
-}
-
-function stringHasValidCharacter(str, library) {
-  
-}
-
+// Alert fxn
 function HeyYouGuys(BecauseILikeGoonies) {
   alert(BecauseILikeGoonies);
 }
 
+//gets all available cutomers via GET request
 function LoadCustomerList() {
 
   return fetch(`/api/customers`).then(response => {
@@ -26,7 +18,7 @@ function LoadCustomerList() {
   
 }
 
-
+// gets all locations via GET request
 function LoadLocationList() {
 
   return fetch(`/api/locations`).then(response => {
@@ -39,7 +31,7 @@ function LoadLocationList() {
 
 //LoadLocationList();
 
-
+// gets all products via GET request
 function LoadProductList() {
   return fetch(`/api/products`).then(response => {
     if(!response.ok) {
@@ -50,29 +42,8 @@ function LoadProductList() {
 
 }
 
-
+// loads all orders via a GET request
 function LoadOrderList() {
-  // const orders =  [
-  //   {
-  //     ID: '1',
-  //     Customer: 'Bob Smith',
-  //     Location: 'X'
-  //   },    
-  //   {
-  //     ID: '2',
-  //     Customer: 'Bob Smith',
-  //     Location: 'Y'
-  //   },    
-  //   {
-  //     ID: '3',
-  //     Customer: 'Bob Smith',
-  //     Location: 'Z'    },    
-  // ];
-
-  // const anchor = document.getElementById('orderList');
-  // for(const order of orders) {
-  //   anchor.appendChild(new Option(`${order.Customer} - ${order.ID}`,`${order.ID}`));
-  // }
   return fetch(`/api/orders`).then(response => {
     if(!response.ok) {
 
@@ -80,16 +51,9 @@ function LoadOrderList() {
     }
     return response.json();
   });
-
-
 }
 
-
-function LoadListsForOrders() {
-  LoadLocationList();
-  LoadCustomerList();
-}
-
+// sends customer name via GET request
 function sendCustomer(firstName, lastName) {
   return fetch(`/api/searchCustomer/${firstName}/${lastName}`).then(response => 
    {
@@ -100,7 +64,7 @@ function sendCustomer(firstName, lastName) {
       throw new Error(`Network response was not ok (${response.status})`);
 
     }
-return response.json()})
+    return response.json()})
          
   .then(customer => {
     if (customer === null)
