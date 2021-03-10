@@ -63,7 +63,9 @@ namespace StoreApp.DbAccess.Repositories
       var order = new StoreApp.Library.Models.Order();
       var query = _orders.Orders
       .Find(id);
-      var items = _orders.Orderitems.Where(oi => oi.OrderId == id).ToList();
+      var items = _orders.Orderitems
+        .Include(oi => oi.Product)
+        .Where(oi => oi.OrderId == id).ToList();
       var allItemsInOrder = new HashSet<Orderline>();
       foreach (var item in items)
       {
@@ -72,8 +74,13 @@ namespace StoreApp.DbAccess.Repositories
           Id = item.Id,
           OrderId = (int)item.OrderId,
           Quantity = item.Quantity,
-          ProductId = (int)item.ProductId
-
+          ProductId = (int)item.ProductId,
+          Product = new Library.Models.Product{
+            Id = item.Product.Id,
+            Name = item.Product.Name,
+            Description = item.Product.Description,
+            Price = item.Product.Price.HasValue ? (decimal)item.Product.Price : 0.0M
+          }
         });
       }
 

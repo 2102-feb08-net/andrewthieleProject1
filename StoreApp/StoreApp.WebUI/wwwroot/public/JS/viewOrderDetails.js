@@ -46,7 +46,7 @@ function DisplayOrderDetails(orderID) {
       } else {
         orderInfo.orderItems.forEach(orderedItem => {
           let orderedItemInfo = document.createElement("p");
-          orderedItemInfo.innerHTML = `Prodcuct Id: ${orderedItem.productId} Quantity: ${orderedItem.quantity}`
+          orderedItemInfo.innerHTML = `Product: ${orderedItem.name} Quantity: ${orderedItem.quantity}`
           document.getElementById("addOrderLinesHere").appendChild(orderedItemInfo);
         });
       }
