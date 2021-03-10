@@ -35,12 +35,13 @@ namespace StoreApp.DbAccess.Repositories
         var itemsOrdered = new HashSet<Orderline>();
         foreach (var orderedItem in order.Orderitems)
         {
+          var product = new Library.Models.Product(orderedItem.Product.Name, orderedItem.Product.Description, (decimal)orderedItem.Product.Price);
 
           itemsOrdered.Add(new Library.Models.Orderline
           {
             Id = orderedItem.Id,
             OrderId = (int)orderedItem.OrderId,
-            ProductId = (int)orderedItem.ProductId,
+            Product = product,
             Quantity = orderedItem.Quantity
           });
         }
@@ -67,13 +68,13 @@ namespace StoreApp.DbAccess.Repositories
       var allItemsInOrder = new HashSet<Orderline>();
       foreach (var item in items)
       {
+        var product = new StoreApp.Library.Models.Product(item.Product.Name, item.Product.Description, (decimal)item.Product.Price);
         allItemsInOrder.Add(new Orderline
         {
           Id = item.Id,
           OrderId = (int)item.OrderId,
           Quantity = item.Quantity,
-          ProductId = (int)item.ProductId
-
+          Product = product
         });
       }
 
@@ -105,11 +106,13 @@ namespace StoreApp.DbAccess.Repositories
 
         foreach (var orderline in order.Orderitems)
         {
+          var product = new StoreApp.Library.Models.Product(orderline.Product.Name, orderline.Product.Description, (decimal)orderline.Product.Price);
+
           itemsInCustomerOrder.Add(new StoreApp.Library.Models.Orderline
           {
             Id = orderline.Id,
             OrderId = (int)orderline.OrderId,
-            ProductId = (int)orderline.ProductId,
+            Product = product,
             Quantity = orderline.Quantity
           });
         }
@@ -145,11 +148,13 @@ namespace StoreApp.DbAccess.Repositories
 
         foreach (var orderline in order.Orderitems)
         {
+          var product = new StoreApp.Library.Models.Product(orderline.Product.Name, orderline.Product.Description, (decimal)orderline.Product.Price);
+
           itemsInLocationOrder.Add(new StoreApp.Library.Models.Orderline
           {
             Id = orderline.Id,
             OrderId = (int)orderline.OrderId,
-            ProductId = (int)orderline.ProductId,
+            Product = product,
             Quantity = orderline.Quantity
 
           });
