@@ -29,6 +29,13 @@ To-do list:
 * Beautiful styling
 * Navbars everywhere
 
+## Screenshots
+![Screenshot (6)](https://user-images.githubusercontent.com/48230725/111734893-fdae1800-8848-11eb-81bc-ef28a54eb392.png)
+![Screenshot (10)](https://user-images.githubusercontent.com/48230725/111734813-d6574b00-8848-11eb-944f-20499626c893.png)
+![Screenshot (17)](https://user-images.githubusercontent.com/48230725/111734828-dce5c280-8848-11eb-8cdf-022b36e463af.png)
+
+
+
 ## Getting Started
 1. [Clone repo via git clone repolink](https://github.com/2102-feb08-net/andrewthieleProject1.git)
 2. Create Azure account for Azure SQL.  Allow connections from azure
