@@ -30,7 +30,7 @@ To-do list:
 * Navbars everywhere
 
 ## Getting Started
-1. [Clone repo via git clone repolink] (https://github.com/2102-feb08-net/andrewthieleProject1.git)
+1. [Clone repo via git clone repolink](https://github.com/2102-feb08-net/andrewthieleProject1.git)
 2. Create Azure account for Azure SQL.  Allow connections from azure
 3. Insert connection string into StoreAPP.WebUI source
 4. Create Web app on Azure cloud
